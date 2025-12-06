@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, DollarSign } from "lucide-react";
 import heroimg from '../assets/hero.avif'
+import { Link } from "react-router";
 export default function Hero() {
   return (
     <section className=" py-20">
@@ -44,9 +45,9 @@ export default function Hero() {
               Apply for Loan →
             </button>
 
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl shadow-md">
+            <Link to='/allloan' className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl shadow-md">
               Explore Loans
-            </button>
+            </Link>
           </div>
 
           {/* Features */}

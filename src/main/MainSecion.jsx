@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Percent, DollarSign, Calendar } from 'lucide-react'
 import { FiChevronRight } from 'react-icons/fi'
@@ -70,6 +70,22 @@ function Badge({ children, color = 'bg-sky-100 text-sky-700' }) {
 }
 
 export default function MainSection() {
+  const [amount, setAmount] = useState(5000);
+  const [months, setMonths] = useState(12);
+  const [interest, setInterest] = useState(8.5);
+  const [emi, setEmi] = useState(0);
+  const [totalPayable, setTotalPayable] = useState(0);
+
+  useEffect(() => {
+    // EMI Calculation Formula: P * r * (1 + r)^n / ((1 + r)^n - 1)
+    const r = interest / 12 / 100;
+    const emiValue = amount * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+    setEmi(Math.round(emiValue));
+    setTotalPayable(Math.round(emiValue * months));
+  }, [amount, months, interest]);
+
+
+
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <div>
@@ -152,25 +168,26 @@ export default function MainSection() {
             <div className="mt-4">
               <div className="flex items-center justify-between text-sm text-white/80">
                 <span>Loan Amount</span>
-                <strong>$17,500</strong>
+                <strong>${amount}</strong>
               </div>
-
-              <input type="range" min="1000" max="50000" defaultValue={17500} className="w-full mt-4" />
+                {/* rang 1 */}
+              <input type="range" onChange={(e) => setAmount(Number(e.target.value))} min="1000" max="50000" defaultValue={17500} className="w-full mt-4" />
 
               <div className="flex items-center justify-between text-sm text-white/80 mt-6">
                 <span>Duration</span>
-                <strong>14 Months</strong>
+                <strong>{months} Months</strong>
               </div>
-              <input type="range" min="1" max="60" defaultValue={14} className="w-full mt-4" />
+              {/* rang 2 */}
+              <input type="range" onChange={(e) => setMonths(Number(e.target.value))} min="1" max="60" defaultValue={14} className="w-full mt-4" />
 
               <div className="mt-6 grid grid-cols-2 gap-4 text-white">
                 <div>
                   <p className="text-xs text-white/80">Monthly EMI</p>
-                  <p className="text-2xl font-bold">$1317</p>
+                  <p className="text-2xl font-bold">${emi}</p>
                 </div>
                 <div>
                   <p className="text-xs text-white/80">Total Payable</p>
-                  <p className="text-2xl font-bold">$18,444</p>
+                  <p className="text-2xl font-bold">${totalPayable.toLocaleString()}</p>
                 </div>
               </div>
 

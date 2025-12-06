@@ -1,11 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom"; // use react-router-dom
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export default function Login() {
+    const {signInUser,signInGoogle} = use(AuthContext)
   const {
     register,
     handleSubmit,
@@ -21,16 +23,33 @@ export default function Login() {
   const onSubmit = async (data) => {
     // replace with real auth call
     console.log("login payload:", data);
-    alert("Login payload logged to console");
+    signInUser(data.email,data.password)
+    .then(res=>{
+        alert("Login Successfully")
+        console.log(res)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+    
   };
-
+  const handlegoogleLogin=()=>{
+    signInGoogle()
+    .then(res=>{
+        alert("Login successfully")
+        console.log(res)
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+  }
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12 bg-slate-50">
+    <div className="min-h-screen flex items-center justify-center px-6 py-12 ">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="w-full max-w-md rounded-2xl shadow-lg border border-slate-100 p-8 bg-white"
+        className="w-full max-w-md rounded-2xl shadow-lg border border-slate-100 p-8"
       >
         <div className="flex flex-col items-center">
           <div className="w-14 h-14 rounded-xl bg-cyan-800 flex items-center justify-center text-white font-bold text-xl mb-4">
@@ -126,8 +145,9 @@ export default function Login() {
 
           <div className="grid grid-cols-1 gap-3">
             <button
+            
               type="button"
-              onClick={() => alert("Google OAuth flow")}
+              onClick={handlegoogleLogin}
               className="flex items-center justify-center gap-3 border border-sky-700 hover:bg-cyan-800 hover:text-white transition ease-in-out py-3 rounded-xl font-medium"
             >
               <FaGoogle className="w-5 h-5" />

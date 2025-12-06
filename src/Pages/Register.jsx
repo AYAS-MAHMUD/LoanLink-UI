@@ -25,8 +25,8 @@ export default function Register() {
         alert("Sign in with google successfully")
         console.log(res)
     })
-    .then(error=>{
-        console.log(error)
+    .catch(error=>{
+      console.log(error)
     })
   }
   return (
@@ -50,7 +50,7 @@ export default function Register() {
           </p>
         </div>
 
-        {/* IMPORTANT: use onSubmit, NOT onClick */}
+        
         <form
           className="mt-4 space-y-4"
           onSubmit={handleSubmit(handleRegisterSubmit)}
