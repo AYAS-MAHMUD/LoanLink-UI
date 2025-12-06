@@ -1,18 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, NavLink } from "react-router";
 import { FaPaperPlane } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-      // for theme toggle
-const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const { user } = use(AuthContext);
+  console.log(user);
+
+  // for theme toggle
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   useEffect(() => {
     const html = document.querySelector("html");
     html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
-
 
   const handleTheme = (checked) => {
     setTheme(checked ? "dark" : "light");
@@ -24,7 +27,9 @@ const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
         {/* Logo */}
         <div className="flex-shrink-0">
           <h1 className="text-2xl font-bold text-cyan-900 flex ">
-            <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center text-white font-bold text-lg">L</div>
+            <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center text-white font-bold text-lg">
+              L
+            </div>
             LoanLink
           </h1>
         </div>
@@ -55,26 +60,44 @@ const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
           >
             Contact
           </NavLink>
-         
-        </div>
-        
-
-<div className='flex items-center gap-4'>
-        <input
-           onChange={(e) => handleTheme(e.target.checked)}
-           type="checkbox"
-           defaultChecked={localStorage.getItem('theme') === "dark"}
-           className="toggle"/>
-
+          {user && (
+            <NavLink
+              to="/dashboard"
+              className="hover:text-cyan-800 text-md font-semibold "
+            >
+              Dashboard
+            </NavLink>
+          )}
         </div>
 
-
+        <div className="flex items-center gap-4">
+          <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            type="checkbox"
+            defaultChecked={localStorage.getItem("theme") === "dark"}
+            className="toggle"
+          />
+        </div>
 
         <div className="hidden md:block">
-
-          <Link to='/login' class="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400">
-            <FaPaperPlane /> Login
-          </Link>
+          {user ? (
+            <div className="flex gap-3">
+              <div>
+                <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
+              </div>
+              <button className="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400">
+                Sign Out
+              </button>
+              
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400"
+            >
+              <FaPaperPlane /> Sign in
+            </Link>
+          )}
         </div>
         {/* Mobile er jonno toggle icon */}
         <div className="md:hidden">
@@ -121,37 +144,54 @@ const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
           >
             <div className="px-4 pb-4 space-y-3 flex items-center flex-col bg-gray-800 py-5 text-white">
               <NavLink
-            to="/"
-            className="hover:text-cyan-800 text-md font-semibold "
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/allloan"
-            className="hover:text-cyan-800 text-md font-semibold "
-          >
-            All Loan
-          </NavLink>
+                to="/"
+                className="hover:text-cyan-800 text-md font-semibold "
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/allloan"
+                className="hover:text-cyan-800 text-md font-semibold "
+              >
+                All Loan
+              </NavLink>
 
-          <NavLink
-            to="/about"
-            className="hover:text-cyan-800 text-md font-semibold "
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className="hover:text-cyan-800 text-md font-semibold "
-          >
-            Contact
-          </NavLink>
-              <Link to='/login' class="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400">
-            <FaPaperPlane /> Login
-          </Link>
+              <NavLink
+                to="/about"
+                className="hover:text-cyan-800 text-md font-semibold "
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className="hover:text-cyan-800 text-md font-semibold "
+              >
+                Contact
+              </NavLink>
+              {user && (
+                <NavLink
+                  to="/dashboard"
+                  className="hover:text-cyan-800 text-md font-semibold "
+                >
+                  Dashboard
+                </NavLink>
+              )}
+              {user ? (
+                <div>
+                  <button className="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400">
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-cyan-800 text-gray-300 flex items-center gap-1 px-4 py-2 rounded-full font-medium hover:bg-cyan-900 ring-2 ring-cyan-500 hover:text-white transition-colors duration-400"
+                >
+                  <FaPaperPlane /> Sign in
+                </Link>
+              )}
             </div>
-            <div>
-              
-            </div>
+            <div></div>
           </motion.div>
         )}
       </AnimatePresence>

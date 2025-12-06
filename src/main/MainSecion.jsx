@@ -3,9 +3,6 @@ import { motion } from 'framer-motion'
 import { Percent, DollarSign, Calendar } from 'lucide-react'
 import { FiChevronRight } from 'react-icons/fi'
 
-// LoanCardsGrid.jsx
-// Usage: place this component in your app. Requires Tailwind CSS, framer-motion,
-// lucide-react and react-icons installed.
 
 const loans = [
   {
@@ -110,8 +107,8 @@ export default function MainSection() {
                   <p className="mt-2 text-sm text-slate-500 leading-relaxed">{loan.tagline}</p>
 
                   <div className="mt-5 flex flex-col items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2 px-3 py-2 text-black bg-slate-50 rounded-lg">
+                    <div className="flex justify-between  gap-4">
+                      <div className="flex items-center gap-2 py-1 px-2 text-black bg-slate-50 rounded-lg">
                         <Percent size={18} />
                         <div>
                           <p className="text-xs text-slate-400">Interest</p>
@@ -143,7 +140,7 @@ export default function MainSection() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-sky-800 to-sky-700 text-white rounded-2xl p-6 shadow-lg"
+            className="bg-gradient-to-br from-cyan-900 to-sky-600 text-white rounded-2xl p-6 shadow-lg"
           >
             <h4 className="flex items-center gap-3 text-lg font-semibold">
               <span className="bg-white/10 p-2 rounded-md inline-flex">

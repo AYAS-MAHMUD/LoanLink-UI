@@ -11,7 +11,7 @@ export default function Hero() {
         <div className="flex flex-col justify-center">
           {/* Badge */}
           <div className="flex items-center space-x-2 mb-5">
-            <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
+            <span className="w-3 h-3 bg-cyan-600 rounded-full"></span>
             <span className="text-sm font-medium text-gray-600">
               Fast & Secure Microloans
             </span>
