@@ -7,7 +7,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user ,signOutUser} = use(AuthContext);
-  // console.log(user);
+  console.log(user);
 
   // for theme toggle
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");

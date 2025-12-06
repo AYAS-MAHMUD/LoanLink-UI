@@ -8,6 +8,7 @@ import About from "../Pages/About";
 import AllLoans from "../Pages/AllLoans";
 import MainDashboard from "../Dashboard/MainDashboard";
 import ErrorPage from "../Pages/ErrorPage";
+import PrivetRoute from "../Provider/PrivetRoute";
 
 
 export const router = createBrowserRouter([
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
     },
     {
         path : 'dashboard',
-        Component : MainDashboard
+        element : <MainDashboard/>
+
     }
 ])

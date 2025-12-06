@@ -1,13 +1,14 @@
 import React, { use } from "react";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { Mail, Lock } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom"; // use react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // use react-router-dom
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export default function Login() {
-    const {signInUser,signInGoogle} = use(AuthContext)
+    const navigation = useNavigate()
+    const {signInUser,signInGoogle, passwordReset,user} = use(AuthContext)
   const {
     register,
     handleSubmit,
@@ -27,6 +28,7 @@ export default function Login() {
     .then(res=>{
         alert("Login Successfully")
         console.log(res)
+        navigation('/')
     })
     .catch(error=>{
       console.log(error)
@@ -34,13 +36,22 @@ export default function Login() {
     
   };
   const handlegoogleLogin=()=>{
-    signInGoogle()
+    signInGoogle(user?.email)
     .then(res=>{
         alert("Login successfully")
         console.log(res)
+        navigation('/')
     })
     .catch(error=>{
         console.log(error)
+    })
+  }
+  const handleResetPass=()=>{
+    console.log('forget')
+    passwordReset()
+    .then(res=>{
+        alert("Please Cheak your Gmail")
+        console.log(res)
     })
   }
   return (
@@ -94,9 +105,9 @@ export default function Login() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-medium">Password</label>
-              <a href="#" className="text-sm text-sky-600">
+              <button onClick={handleResetPass} className="text-sm underline text-sky-600">
                 Forgot password?
-              </a>
+              </button>
             </div>
 
             <div className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">

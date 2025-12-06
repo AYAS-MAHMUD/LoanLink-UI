@@ -4,10 +4,11 @@ import { User, Mail, Lock, Image as ImageIcon } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 export default function Register() {
     const {createUser, signInGoogle} = use(AuthContext)
-
+    const navigation = useNavigate()
   const {
     register,
     handleSubmit,
@@ -17,6 +18,13 @@ export default function Register() {
   function handleRegisterSubmit(data) {
     console.log(data.email,data.password);
     createUser(data.email,data.password)
+    .then(() => {
+        alert("Register Successfully")
+        navigation("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     alert("Registered — check console for payload");
   }
   const handleGoogleLogin=()=>{
@@ -24,6 +32,7 @@ export default function Register() {
     .then(res=>{
         alert("Sign in with google successfully")
         console.log(res)
+        navigation('/')
     })
     .catch(error=>{
       console.log(error)

@@ -51,7 +51,7 @@ export const Testimonials= () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className='shadow-xl p-7 rounded-2xl'
+              className='shadow-xl p-4 rounded-2xl'
             >
               <div className="h-full relative">
                 <Quote className="absolute top-6 right-6 text-primary/10" size={40} />
