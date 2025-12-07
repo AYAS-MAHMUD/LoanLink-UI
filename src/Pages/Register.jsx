@@ -5,10 +5,14 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 import { useNavigate } from "react-router";
+// import { useAxios } from "../Hook/useAxios";
+import { useAxiosSecure } from "../Hook/useAxiosSecure";
+
 
 export default function Register() {
     const {createUser, signInGoogle} = use(AuthContext)
     const navigation = useNavigate()
+    const axiosSecure = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -16,11 +20,22 @@ export default function Register() {
   } = useForm();
 
   function handleRegisterSubmit(data) {
-    console.log(data.email,data.password);
+    console.log(data);
     createUser(data.email,data.password)
     .then(() => {
         alert("Register Successfully")
         navigation("/");
+        const userInfo = {
+          email : data.email,
+          name : data.name,
+          photoURL : data.photoURL,
+        }
+        axiosSecure.post('/users',userInfo)
+        .then(res=>{
+          if(res.data.insertedId){
+            console.log("user created in the database")
+          }
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -31,13 +46,30 @@ export default function Register() {
     signInGoogle()
     .then(res=>{
         alert("Sign in with google successfully")
-        console.log(res)
+        // console.log(res.user)
         navigation('/')
+        const userInfo = {
+          email : res.user.email,
+          name : res.user.displayName,
+          photoURL : res.user.photoURL,
+        }
+        axiosSecure.post('/users',userInfo)
+        .then(res=>{
+          if(res.data.insertedId){
+            console.log("user created in the database")
+          }
+        })
     })
     .catch(error=>{
       console.log(error)
     })
   }
+
+
+
+
+
+
   return (
     <div className="min-h-screen  flex items-center justify-center px-6 py-12">
       <motion.div

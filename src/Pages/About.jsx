@@ -87,7 +87,7 @@ const About = () => {
                   transition={{ delay: index * 0.1 }}
                   className='shadow-xl rounded-2xl'
                 >
-                  <div className="text-center py-8 border-t-4 border-accent">
+                  <div className="text-center py-8 border-t-4 border-cyan-800">
                     <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
                       <stat.icon size={24} />
                     </div>

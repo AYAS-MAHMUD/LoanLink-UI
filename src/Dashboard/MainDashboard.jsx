@@ -4,6 +4,7 @@ import { FiSun, FiMoon, FiLogOut, FiMenu, FiX } from 'react-icons/fi'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { AuthContext } from '../Provider/AuthProvider'
 import { Link } from 'react-router'
+import useRole from '../Hook/useRole'
 
 
 const stats = [
@@ -40,6 +41,8 @@ const sampleLoans = Array.from({ length: 6 }).map((_, i) => ({
 const MainDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false) //aside default vave close takbe
     const {user} = use(AuthContext)
+    const {role} = useRole()
+    console.log(role)
 
   return (
     <div className="min-h-screen text-white">
@@ -52,7 +55,12 @@ const MainDashboard = () => {
           md:translate-x-0 w-72`}
         >
           <div className="h-16 flex items-center px-6 border-b dark:border-gray-700 justify-between">
-            <Link to='/' className="font-bold text-lg">LoanLink</Link>
+            <Link to='/' className="text-2xl font-bold  flex ">
+            <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center text-white font-bold text-lg">
+              L
+            </div>
+            LoanLink
+          </Link>
             {/* close button only visible on mobile when sidebar open */}
             <button
               className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"

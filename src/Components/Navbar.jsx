@@ -3,11 +3,13 @@ import { Link, NavLink } from "react-router";
 import { FaPaperPlane } from "react-icons/fa";
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+// import useRole from "../Hook/useRole";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user ,signOutUser} = use(AuthContext);
-  console.log(user);
+
+  // console.log(user);
 
   // for theme toggle
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -38,7 +40,7 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center text-white font-bold text-lg">
               L
             </div>
-            LoanLink
+            LoanLink 
           </h1>
         </div>
 

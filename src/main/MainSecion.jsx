@@ -2,64 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Percent, DollarSign, Calendar } from 'lucide-react'
 import { FiChevronRight } from 'react-icons/fi'
-
-
-const loans = [
-  {
-    id: 1,
-    title: 'Personal Flex Loan',
-    tagline: 'Quick funds for your personal needs with flexible repayment...',
-    interest: '8.5%',
-    max: '$5,000',
-    img: '/images/loan-plant.jpg',
-    tag: 'Personal'
-  },
-  {
-    id: 2,
-    title: 'Small Business Boost',
-    tagline: 'Capital to grow your small business or startup venture.',
-    interest: '7.2%',
-    max: '$25,000',
-    img: '/images/loan-business.jpg',
-    tag: 'Business'
-  },
-  {
-    id: 3,
-    title: 'Education Support',
-    tagline: 'Invest in your future with our low-interest education loans.',
-    interest: '5.5%',
-    max: '$15,000',
-    img: '/images/loan-education.jpg',
-    tag: 'Education'
-  },
-  {
-    id: 4,
-    title: 'Emergency Cash',
-    tagline: 'Instant approval for unexpected expenses and emergencies.',
-    interest: '9.8%',
-    max: '$2,000',
-    img: '/images/loan-emergency.jpg',
-    tag: 'Emergency'
-  },
-  {
-    id: 5,
-    title: 'Home Improvement',
-    tagline: 'Renovate your home with our specialized improvement loans.',
-    interest: '6.9%',
-    max: '$20,000',
-    img: '/images/loan-home.jpg',
-    tag: 'Personal'
-  },
-  {
-    id: 6,
-    title: 'Tech Upgrade',
-    tagline: 'Get the latest gadgets and equipment with easy EMI plans.',
-    interest: '8%',
-    max: '$3,000',
-    img: '/images/loan-tech.jpg',
-    tag: 'Personal'
-  }
-]
+import { useQuery } from '@tanstack/react-query'
+import { useAxios } from '../Hook/useAxios'
+import Loading from '../Components/Loading'
+import LoanCard from '../Components/LoanCard'
 
 function Badge({ children, color = 'bg-sky-100 text-sky-700' }) {
   return (
@@ -76,8 +22,11 @@ export default function MainSection() {
   const [emi, setEmi] = useState(0);
   const [totalPayable, setTotalPayable] = useState(0);
 
+
+  const axios = useAxios()
+
   useEffect(() => {
-    // EMI Calculation Formula: P * r * (1 + r)^n / ((1 + r)^n - 1)
+    
     const r = interest / 12 / 100;
     const emiValue = amount * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
     setEmi(Math.round(emiValue));
@@ -85,7 +34,17 @@ export default function MainSection() {
   }, [amount, months, interest]);
 
 
-
+  const {data : loans = [],isLoading} = useQuery({
+    queryKey : ['loan'],
+    queryFn : async ()=>{
+      const res = await axios.get('/lone/latestloan')
+      return res.data
+    }
+  })
+  console.log(loans)
+  if(isLoading){
+    return <Loading/>
+  }
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <div>
@@ -97,56 +56,7 @@ export default function MainSection() {
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {loans.map((loan) => (
-              <motion.div
-                key={loan.id}
-                whileHover={{ y: -6 }}
-                className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100"
-              >
-                <div className="h-36 bg-gray-50 relative">
-                  {/* image area */}
-                  <img
-                    src={loan.img}
-                    alt={loan.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // fallback placeholder color block if image missing
-                      e.currentTarget.style.display = 'none'
-                    }}
-                  />
-                  <div className="absolute top-3 right-3">
-                    <Badge>{loan.tag}</Badge>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-slate-900">{loan.title}</h3>
-                  <p className="mt-2 text-sm text-slate-500 leading-relaxed">{loan.tagline}</p>
-
-                  <div className="mt-5 flex flex-col items-center justify-between gap-4">
-                    <div className="flex justify-between  gap-4">
-                      <div className="flex items-center gap-2 py-1 px-2 text-black bg-slate-50 rounded-lg">
-                        <Percent size={18} />
-                        <div>
-                          <p className="text-xs text-slate-400">Interest</p>
-                          <p className="font-semibold text-slate-800 text-sm">{loan.interest}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center text-black gap-2 px-3 py-2 bg-slate-50 rounded-lg">
-                        <DollarSign size={18} />
-                        <div>
-                          <p className="text-xs text-slate-400">Max Amount</p>
-                          <p className="font-semibold text-slate-800 text-sm">{loan.max}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button className="ml-auto hover:text-white text-black transition ease-in-out justify-center inline-flex text-center w-full items-center gap-2 px-4 py-2 rounded-full border border-cyan-800  hover:bg-cyan-800">
-                      View Details <FiChevronRight />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+              <LoanCard loan={loan}/>
             ))}
           </div>
         </div>

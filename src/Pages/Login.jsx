@@ -5,8 +5,10 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom"; // use react-router-dom
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
+import { useAxios } from "../Hook/useAxios";
 
 export default function Login() {
+  const axios = useAxios()
     const navigation = useNavigate()
     const {signInUser,signInGoogle, passwordReset,user} = use(AuthContext)
   const {
@@ -36,11 +38,22 @@ export default function Login() {
     
   };
   const handlegoogleLogin=()=>{
-    signInGoogle(user?.email)
+    signInGoogle()
     .then(res=>{
         alert("Login successfully")
-        console.log(res)
+        // console.log(res)
         navigation('/')
+        const userInfo = {
+          email : res.user.email,
+          name : res.user.displayName,
+          photoURL : res.user.photoURL,
+        }
+        axios.post('/users',userInfo)
+        .then(res=>{
+          if(res.data.insertedId){
+            console.log("user created in the database")
+          }
+        })
     })
     .catch(error=>{
         console.log(error)
