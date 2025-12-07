@@ -179,12 +179,20 @@ export default function Navbar() {
                 Contact
               </NavLink>
               {user && (
+                <>
                 <NavLink
                   to="/dashboard"
                   className="hover:text-cyan-800 text-md font-semibold "
                 >
                   Dashboard
                 </NavLink>
+                <NavLink
+                  to="/dashboard"
+                  className="hover:text-cyan-800 text-md font-semibold "
+                >
+                  Add Loan
+                </NavLink>
+                </>
               )}
               {user ? (
                 <div>

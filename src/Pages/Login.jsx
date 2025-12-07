@@ -1,16 +1,17 @@
 import React, { use } from "react";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Mail, Lock } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom"; // use react-router-dom
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
-import { useAxios } from "../Hook/useAxios";
+// import { useAxios } from "../Hook/useAxios";
+import { useAxiosSecure } from "../Hook/useAxiosSecure";
 
 export default function Login() {
-  const axios = useAxios()
+  const axios = useAxiosSecure()
     const navigation = useNavigate()
-    const {signInUser,signInGoogle, passwordReset,user} = use(AuthContext)
+    const {signInUser,signInGoogle, passwordReset} = use(AuthContext)
   const {
     register,
     handleSubmit,

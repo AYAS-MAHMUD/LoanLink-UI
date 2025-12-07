@@ -9,6 +9,7 @@ import AllLoans from "../Pages/AllLoans";
 import MainDashboard from "../Dashboard/MainDashboard";
 import ErrorPage from "../Pages/ErrorPage";
 import PrivetRoute from "../Provider/PrivetRoute";
+import Dashboard from "../Dashboard/Dashboard";
 
 
 export const router = createBrowserRouter([
@@ -45,7 +46,12 @@ export const router = createBrowserRouter([
     },
     {
         path : 'dashboard',
-        element : <MainDashboard/>
-
+        element : <MainDashboard/>,
+        children : [
+            {
+                path : 'AMdashboard',
+                Component : <Dashboard></Dashboard>
+            }
+        ]
     }
 ])

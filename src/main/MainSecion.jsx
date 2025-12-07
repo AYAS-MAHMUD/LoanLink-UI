@@ -3,9 +3,10 @@ import { motion } from 'framer-motion'
 import { Percent, DollarSign, Calendar } from 'lucide-react'
 import { FiChevronRight } from 'react-icons/fi'
 import { useQuery } from '@tanstack/react-query'
-import { useAxios } from '../Hook/useAxios'
+// import { useAxios } from '../Hook/useAxios'
 import Loading from '../Components/Loading'
 import LoanCard from '../Components/LoanCard'
+import { useAxiosSecure } from '../Hook/useAxiosSecure'
 
 function Badge({ children, color = 'bg-sky-100 text-sky-700' }) {
   return (
@@ -23,7 +24,7 @@ export default function MainSection() {
   const [totalPayable, setTotalPayable] = useState(0);
 
 
-  const axios = useAxios()
+  const axios = useAxiosSecure()
 
   useEffect(() => {
     
@@ -37,11 +38,11 @@ export default function MainSection() {
   const {data : loans = [],isLoading} = useQuery({
     queryKey : ['loan'],
     queryFn : async ()=>{
-      const res = await axios.get('/lone/latestloan')
+      const res = await axios.get('/loan/latestloan')
       return res.data
     }
   })
-  console.log(loans)
+  // console.log(loans)
   if(isLoading){
     return <Loading/>
   }

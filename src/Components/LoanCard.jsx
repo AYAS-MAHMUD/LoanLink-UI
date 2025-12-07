@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Badge, DollarSign, Percent } from "lucide-react";
 import { FiChevronRight } from "react-icons/fi";
 const LoanCard = ({ loan }) => {
-  console.log(loan);
+  // console.log(loan);
+  const maxlangth = 40;
   return (
     <div>
       <motion.div
@@ -30,7 +31,7 @@ const LoanCard = ({ loan }) => {
         <div className="p-6">
           <h3 className="text-xl font-bold text-slate-900">{loan.title}</h3>
           <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-            {loan.tagline}
+            {loan.tagline.length>maxlangth?loan.tagline.slice(0,maxlangth) +"..." : loan.tagline}
           </p>
 
           <div className="mt-5 flex flex-col items-center justify-between gap-4">

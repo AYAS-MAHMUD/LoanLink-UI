@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useAxios } from "../Hook/useAxios";
+// import { useAxios } from "../Hook/useAxios";
 import Loading from "../Components/Loading";
 import { motion } from "framer-motion";
 import { Badge, DollarSign, Percent } from "lucide-react";
 import { FiChevronRight } from "react-icons/fi";
 import LoanCard from "../Components/LoanCard";
+import { useAxiosSecure } from "../Hook/useAxiosSecure";
 
 const AllLoans = () => {
-  const axios = useAxios();
+  const axios = useAxiosSecure();
   const { data: allloan = [], isLoading } = useQuery({
     queryKey: ["allloans"],
     queryFn: async () => {
@@ -16,7 +17,7 @@ const AllLoans = () => {
       return res.data;
     },
   });
-  console.log(allloan);
+  // console.log(allloan);
   if (isLoading) {
     return <Loading />;
   }
