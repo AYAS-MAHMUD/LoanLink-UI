@@ -40,7 +40,7 @@ const sampleLoans = Array.from({ length: 6 }).map((_, i) => ({
 }));
 const Dashboard = () => {
   return (
-    <div>
+    <div >
         <main className="p-4 sm:p-6">
             {/* Top stats */}
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

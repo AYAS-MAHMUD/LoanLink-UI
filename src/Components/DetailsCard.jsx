@@ -1,25 +1,47 @@
 import React, { use, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Phone, Mail, Tag, DollarSign, Star, ChevronRight } from "lucide-react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { FiX } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useAxiosSecure } from "../Hook/useAxiosSecure";
+
 
 const DetailsCard = () => {
-    const [open,setOpen] = useState(false)
-    const loan = useLoaderData();
-    const {user} = use(AuthContext)
+  const [open, setOpen] = useState(false);
+  const loan = useLoaderData();
+  const { user } = use(AuthContext);
+  const axiosSecure = useAxiosSecure()
+  const navigate = useNavigate();
+  // for form
+  const { register, handleSubmit } = useForm();
 
-    // for form
-    const {register,handleSubmit,formState:{errors}} = useForm()
- 
-
-  const handleLoanApplicationSubmit =(data)=>{
-    data.loanId = loan._id
-    console.log(data)
-
-  }
+  const handleLoanApplicationSubmit = (data) => {
+    data.loanId = loan._id;
+    console.log(data);
+    Swal.fire({
+      title: `Ready for ${loan.title}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/loanApplication", data).then((res) => {
+          Swal.fire({
+            title: "Submitted",
+            text: "Your application submitted.",
+            icon: "success",
+          }).then(() => {
+            navigate('/dashboard/myloan');
+          });
+        });
+      }
+    });
+  };
   return (
     <div className="min-h-screen font-sans antialiased">
       <div className="max-w-6xl mx-auto px-6 py-12">
@@ -177,40 +199,154 @@ const DetailsCard = () => {
           </div>
         </section>
       </div>
-       {/* Apply Modal */}
+      {/* Apply Modal */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center px-4">
-            <div onClick={() => setOpen(false)} className="absolute inset-0 bg-black/55" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+          >
+            <div
+              onClick={() => setOpen(false)}
+              className="absolute inset-0 bg-black/55"
+            />
 
-            <motion.div initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 12, opacity: 0 }} className="relative z-10 w-full max-w-xl  bg-cyan-900 text-white rounded-2xl p-6 shadow-2xl">
+            <motion.div
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 12, opacity: 0 }}
+              className="relative z-10 w-full max-w-xl  bg-cyan-900 text-white rounded-2xl p-6 shadow-2xl"
+            >
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold">Apply for {loan.title}</h3>
-                  <p className="mt-1 text-sm ">Fill the form or contact our team to complete your application.</p>
+                  <h3 className="text-lg font-semibold">
+                    Apply for {loan.title}
+                  </h3>
+                  <p className="mt-1 text-sm ">
+                    Fill the form or contact our team to complete your
+                    application.
+                  </p>
                 </div>
-                <button onClick={() => setOpen(false)} className="p-2 rounded-md  hover:bg-slate-100 dark:hover:bg-slate-800">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded-md  hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
                   <FiX />
                 </button>
               </div>
 
-              <form  className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onSubmit={handleSubmit(handleLoanApplicationSubmit)}>
-                <input {...register('fullName')} required name="fullName" className="col-span-2 p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800" placeholder="Full name" />
-                <input {...register('borrowerEmail')} defaultValue={user?.email} required readOnly type="email" name="borrowerEmail" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800" placeholder="Email" />
-                <input {...register('loanInterestRate')} defaultValue={loan.interest} required readOnly name="loanInterestRate" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800" placeholder="Interest Rate" />
-                <input {...register('loanTitle')} defaultValue={loan.title} required readOnly name="loanTitle" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 col-span-2 dark:bg-slate-800" placeholder="Loan title" />
-                <input {...register('nidOrpassport')} required name="nidOrpassport" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="National ID / Passport" />
-                <input {...register('contactNumber')} required name="contactNumber" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Phone" />
-                <input {...register('incomeSource')} required name="incomesource" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Income Source" />
-                <input {...register('monthlyIncome')} required name="monthlyIncome" className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Monthly Income" />
-                <input {...register('loanAmount')} required name="loanAmount" className="p-3 col-span-2 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Loan Amount" />
-                <input {...register('reasonForLoan')} required name="reasonForLoan" className="p-3 col-span-2 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Reason For Loan" />
-                <input {...register('address')} required name="address" className="p-3 rounded-lg border col-span-2 dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Address" />
-                <input {...register('extraNote')} required name="extraNote" className="p-3 rounded-lg border col-span-2 dark:border-slate-700 bg-slate-50  dark:bg-slate-800" placeholder="Extra Note" />
+              <form
+                className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3"
+                onSubmit={handleSubmit(handleLoanApplicationSubmit)}
+              >
+                <input
+                  {...register("fullName")}
+                  required
+                  name="fullName"
+                  className="col-span-2 p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                  placeholder="Full name"
+                />
+                <input
+                  {...register("borrowerEmail")}
+                  defaultValue={user?.email}
+                  required
+                  readOnly
+                  type="email"
+                  name="borrowerEmail"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                  placeholder="Email"
+                />
+                <input
+                  {...register("loanInterestRate")}
+                  defaultValue={loan.interest}
+                  required
+                  readOnly
+                  name="loanInterestRate"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                  placeholder="Interest Rate"
+                />
+                <input
+                  {...register("loanTitle")}
+                  defaultValue={loan.title}
+                  required
+                  readOnly
+                  name="loanTitle"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 col-span-2 dark:bg-slate-800"
+                  placeholder="Loan title"
+                />
+                <input
+                  {...register("nidOrpassport")}
+                  required
+                  name="nidOrpassport"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="National ID / Passport"
+                />
+                <input
+                  {...register("contactNumber")}
+                  required
+                  name="contactNumber"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Phone"
+                />
+                <input
+                  {...register("incomeSource")}
+                  required
+                  name="incomesource"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Income Source"
+                />
+                <input
+                  {...register("monthlyIncome")}
+                  required
+                  name="monthlyIncome"
+                  className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Monthly Income"
+                />
+                <input
+                  {...register("loanAmount")}
+                  required
+                  name="loanAmount"
+                  className="p-3 col-span-2 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Loan Amount"
+                />
+                <input
+                  {...register("reasonForLoan")}
+                  required
+                  name="reasonForLoan"
+                  className="p-3 col-span-2 rounded-lg border dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Reason For Loan"
+                />
+                <input
+                  {...register("address")}
+                  required
+                  name="address"
+                  className="p-3 rounded-lg border col-span-2 dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Address"
+                />
+                <input
+                  {...register("extraNote")}
+                  required
+                  name="extraNote"
+                  className="p-3 rounded-lg border col-span-2 dark:border-slate-700 bg-slate-50  dark:bg-slate-800"
+                  placeholder="Extra Note"
+                />
 
                 <div className="col-span-2 flex items-center justify-end gap-2 mt-2">
-                  <button type="button" onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg">Cancel</button>
-                  <button type="submit" className="px-5 py-2 rounded-lg bg-emerald-600 text-white">Submit Application</button>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-2 rounded-lg"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2 rounded-lg bg-emerald-600 text-white"
+                  >
+                    Submit Application
+                  </button>
                 </div>
               </form>
             </motion.div>

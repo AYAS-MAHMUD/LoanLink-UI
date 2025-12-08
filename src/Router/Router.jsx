@@ -14,6 +14,8 @@ import ManageUser from "../Dashboard/AdminDashboard/ManageUser";
 import AllLoan from "../Dashboard/AdminDashboard/AllLoan";
 import LoanApplication from "../Dashboard/AdminDashboard/LoanApplication";
 import DetailsCard from "../Components/DetailsCard";
+import Myprofile from "../Dashboard/UserDashboard/Myprofile";
+import MyLoan from "../Dashboard/UserDashboard/MyLoan";
 
 
 export const router = createBrowserRouter([
@@ -76,7 +78,16 @@ export const router = createBrowserRouter([
             {
                 path : 'loanapplication',
                 element : <LoanApplication/>
+            },
+            {
+                path : 'myprofile',
+                element : <Myprofile/>
+            },
+            {
+                path : 'myloan',
+                element : <MyLoan/>
             }
         ]
+        
     }
 ])

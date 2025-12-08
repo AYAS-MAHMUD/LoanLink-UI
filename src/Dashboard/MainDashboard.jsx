@@ -15,18 +15,18 @@ const MainDashboard = () => {
   // console.log(role);
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen">
       <div className="flex">
         {/* Sidebar*/}
         <aside
           aria-label="Sidebar"
-          className={`fixed top-0 left-0 h-full bg-white dark:bg-gray-800 border-r dark:border-gray-700 transition-transform z-30 transform
+          className={`fixed top-0 left-0 h-full text-white bg-gray-800 border-r dark:border-gray-700 transition-transform z-30 transform
              ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 w-72`}
         >
           <div className="h-16 flex items-center px-6 border-b dark:border-gray-700 justify-between">
             <Link to="/" className="text-2xl font-bold  flex ">
-              <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center text-white font-bold text-lg">
+              <div className="w-8 h-8 bg-cyan-800 rounded-lg mr-2 flex items-center justify-center  font-bold text-lg">
                 L
               </div>
               LoanLink
@@ -62,15 +62,13 @@ const MainDashboard = () => {
 
               {role === "borrow" && (
                 <>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/myloan">My Loan</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/myprofile">My Profile</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/">Log out</Link>
-                  </li>
+                  <Link to="/dashboard/myloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    My Loan
+                  </li></Link>
+                  <Link to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    My Profile
+                  </li></Link>
+                  
                 </>
               )}
 
@@ -115,7 +113,7 @@ const MainDashboard = () => {
         {/* Main area */}
         <div className="flex-1 md:ml-72 w-full">
           {/* Header */}
-          <header className="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700 bg-white dark:bg-gray-800 sticky top-0 z-10">
+          <header className="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700  text-white bg-gray-800 sticky top-0 z-10">
             <div className="flex items-center gap-3">
               {/* menu toggle - visible on mobile */}
               <button
