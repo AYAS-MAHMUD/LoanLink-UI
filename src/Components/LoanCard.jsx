@@ -2,9 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Badge, DollarSign, Percent } from "lucide-react";
 import { FiChevronRight } from "react-icons/fi";
+import { Link } from "react-router";
 const LoanCard = ({ loan }) => {
   // console.log(loan);
   const maxlangth = 40;
+
   return (
     <div>
       <motion.div
@@ -57,9 +59,9 @@ const LoanCard = ({ loan }) => {
               </div>
             </div>
 
-            <button className="ml-auto group-hover:text-white text-black  ease-in-out justify-center inline-flex text-center w-full items-center gap-2 px-4 py-2 rounded-full border border-cyan-800 transition   group-hover:bg-cyan-800">
+            <Link to={`/detailsCard/${loan._id}`}  className="ml-auto group-hover:text-white text-black  ease-in-out justify-center inline-flex text-center w-full items-center gap-2 px-4 py-2 rounded-full border border-cyan-800 transition   group-hover:bg-cyan-800">
               View Details <FiChevronRight />
-            </button>
+            </Link>
           </div>
         </div>
       </motion.div>

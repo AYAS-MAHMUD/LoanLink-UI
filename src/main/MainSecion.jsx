@@ -38,7 +38,7 @@ export default function MainSection() {
   const {data : loans = [],isLoading} = useQuery({
     queryKey : ['loan'],
     queryFn : async ()=>{
-      const res = await axios.get('/loan/latestloan')
+      const res = await axios.get('/loan/latestloan/top')
       return res.data
     }
   })
@@ -110,7 +110,7 @@ export default function MainSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="bg-white rounded-2xl p-6 shadow-md border"
+            className=" rounded-2xl p-6 shadow-lg shadow-cyan-900 "
           >
             <h4 className="text-lg font-semibold mb-4">Why LoanLink?</h4>
 

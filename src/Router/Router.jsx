@@ -9,7 +9,11 @@ import AllLoans from "../Pages/AllLoans";
 import MainDashboard from "../Dashboard/MainDashboard";
 import ErrorPage from "../Pages/ErrorPage";
 import PrivetRoute from "../Provider/PrivetRoute";
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from "../Dashboard/AdminDashboard/Dashboard";
+import ManageUser from "../Dashboard/AdminDashboard/ManageUser";
+import AllLoan from "../Dashboard/AdminDashboard/AllLoan";
+import LoanApplication from "../Dashboard/AdminDashboard/LoanApplication";
+import DetailsCard from "../Components/DetailsCard";
 
 
 export const router = createBrowserRouter([
@@ -41,16 +45,37 @@ export const router = createBrowserRouter([
             {
                 path : 'allloan',
                 Component : AllLoans
+            },
+            {
+                path : '/detailsCard/:id',
+                element : <PrivetRoute>
+                    <DetailsCard/>
+                </PrivetRoute>,
+                loader : ({params})=>fetch(`http://localhost:3000/allloans/${params.id}`)
             }
         ]
     },
     {
         path : 'dashboard',
-        element : <MainDashboard/>,
+        element : 
+            <MainDashboard/>
+        ,
         children : [
             {
                 path : 'AMdashboard',
-                Component : <Dashboard></Dashboard>
+                element : <Dashboard></Dashboard>
+            },
+            {
+                path : 'manageusers',
+                element : <ManageUser/>
+            },
+            {
+                path : 'allloan',
+                element : <AllLoan/>
+            },
+            {
+                path : 'loanapplication',
+                element : <LoanApplication/>
             }
         ]
     }

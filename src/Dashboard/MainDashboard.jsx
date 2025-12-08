@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { FiSun, FiMoon, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link } from "react-router";
+import { Link, Outlet } from "react-router";
 import useRole from "../Hook/useRole";
-import Dashboard from "./Dashboard";
+import Dashboard from "./AdminDashboard/Dashboard";
 
 
 const MainDashboard = () => {
@@ -45,18 +45,18 @@ const MainDashboard = () => {
             <ul className="space-y-2">
               {role === "admin" && (
                 <>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/AMdashboard">Dashboard</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/manageusers">Manage Users</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/allloan">All Loan</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/loanapplication">Loan Application</Link>
-                  </li>
+                <Link to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Dashboard
+                  </li></Link>
+                <Link to="/dashboard/manageusers"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Manage Users
+                  </li></Link>
+                <Link to="/dashboard/allloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    All Loan
+                  </li></Link>
+                <Link to="/dashboard/loanapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Loan Application
+                  </li></Link>
                 </>
               )}
 
@@ -153,8 +153,9 @@ const MainDashboard = () => {
           </header>
 
           {/* Content area */}
-
-          {/* <Dashboard/> */}
+          <Outlet></Outlet>
+          
+          
 
 
         </div>
