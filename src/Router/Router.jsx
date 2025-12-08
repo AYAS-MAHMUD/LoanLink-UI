@@ -16,6 +16,7 @@ import LoanApplication from "../Dashboard/AdminDashboard/LoanApplication";
 import DetailsCard from "../Components/DetailsCard";
 import Myprofile from "../Dashboard/UserDashboard/Myprofile";
 import MyLoan from "../Dashboard/UserDashboard/MyLoan";
+import AdminPrivet from "../PrivetDashboard/AdminPrivet";
 
 
 export const router = createBrowserRouter([
@@ -65,19 +66,27 @@ export const router = createBrowserRouter([
         children : [
             {
                 path : 'AMdashboard',
-                element : <Dashboard></Dashboard>
+                element : <AdminPrivet>
+                    <Dashboard></Dashboard>
+                </AdminPrivet>
             },
             {
                 path : 'manageusers',
-                element : <ManageUser/>
+                element : <AdminPrivet>
+                    <ManageUser/>
+                </AdminPrivet>
             },
             {
                 path : 'allloan',
-                element : <AllLoan/>
+                element : <AdminPrivet>
+                    <AllLoan/>
+                </AdminPrivet>
             },
             {
                 path : 'loanapplication',
-                element : <LoanApplication/>
+                element : <AdminPrivet>
+                    <LoanApplication/>
+                </AdminPrivet>
             },
             {
                 path : 'myprofile',
