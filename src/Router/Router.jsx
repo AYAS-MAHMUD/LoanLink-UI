@@ -17,6 +17,10 @@ import DetailsCard from "../Components/DetailsCard";
 import Myprofile from "../Dashboard/UserDashboard/Myprofile";
 import MyLoan from "../Dashboard/UserDashboard/MyLoan";
 import AdminPrivet from "../PrivetDashboard/AdminPrivet";
+import AddLoan from "../Dashboard/ManagerDashboard/AddLoan";
+import ManangeLoans from "../Dashboard/ManagerDashboard/ManangeLoans";
+import PendingApplication from "../Dashboard/ManagerDashboard/PendingApplication";
+import ApprovedApplication from "../Dashboard/ManagerDashboard/ApprovedApplication";
 
 
 export const router = createBrowserRouter([
@@ -66,9 +70,9 @@ export const router = createBrowserRouter([
         children : [
             {
                 path : 'AMdashboard',
-                element : <AdminPrivet>
+                element : 
                     <Dashboard></Dashboard>
-                </AdminPrivet>
+                
             },
             {
                 path : 'manageusers',
@@ -95,6 +99,22 @@ export const router = createBrowserRouter([
             {
                 path : 'myloan',
                 element : <MyLoan/>
+            },
+            {
+                path : 'addloan',
+                element : <AddLoan/>
+            },
+            {
+                path : 'manageloans',
+                element : <ManangeLoans/> 
+            },
+            {
+                path : 'pendingapplication',
+                element : <PendingApplication/>
+            },
+            {
+                path : 'approvedapplication',
+                element : <ApprovedApplication/>
             }
         ]
         

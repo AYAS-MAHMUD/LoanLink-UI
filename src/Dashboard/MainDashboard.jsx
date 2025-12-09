@@ -74,27 +74,24 @@ const MainDashboard = () => {
 
               {role === "manager" && (
                 <>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/AMdashboard">Dashboard</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/addloan">Add Loan</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/manageloans">Manage Loans</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/pendingapplication">Pending Application</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/approvedapplication">Approved Application</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/dashboard/profile">My Profile</Link>
-                  </li>
-                  <li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <Link to="/">Log out</Link>
-                  </li>
+                  <Link to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Dashboard
+                  </li></Link>
+                  <Link to="/dashboard/addloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Add Loan
+                  </li></Link>
+                  <Link to="/dashboard/manageloans"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Manage Loans
+                  </li></Link>
+                  <Link to="/dashboard/pendingapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Pending Application
+                  </li></Link>
+                  <Link to="/dashboard/approvedapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    Approved Application
+                  </li></Link>
+                  <Link to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    My Profile
+                  </li></Link>
                 </>
               )}
             </ul>

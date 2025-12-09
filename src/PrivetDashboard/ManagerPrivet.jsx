@@ -1,17 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import useRole from '../Hook/useRole'
 import Loading from '../Components/Loading'
-import { useNavigate } from 'react-router'
 
-const AdminPrivet = () => {
-    const {role ,roleLoading} = useRole()
+const ManagerPrivet = () => {
+  const {role ,roleLoading} = useRole()
     const navigate = useNavigate()
     if(roleLoading){
         return <Loading/>
     }
-    if(role!=='admin'){
+    if(role!=='manager'){
         return navigate('/')
     }
 }
 
-export default AdminPrivet
+export default ManagerPrivet

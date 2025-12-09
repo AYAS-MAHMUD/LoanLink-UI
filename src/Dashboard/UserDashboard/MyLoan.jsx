@@ -297,7 +297,7 @@ const MyLoan = () => {
                     }
                   `}
                   >
-                    {single.status.toUpperCase()}
+                    {single.status}
                   </span>
 
                   <span className="text-xs opacity-70">

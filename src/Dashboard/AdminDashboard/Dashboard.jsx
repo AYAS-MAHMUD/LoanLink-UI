@@ -49,9 +49,9 @@ const Dashboard = () => {
                   key={s.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border dark:border-gray-700"
+                  className=" p-4 rounded-lg shadow-sm border dark:border-gray-700"
                 >
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-sm ">
                     {s.title}
                   </div>
                   <div className="text-2xl font-bold mt-2">{s.value}</div>
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
             <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Chart */}
-              <div className="lg:col-span-2 bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700">
+              <div className="lg:col-span-2 text-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700">
                 <h3 className="font-semibold mb-4">Loans per Month</h3>
                 <div style={{ width: "100%", height: 220 }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -76,7 +76,7 @@ const Dashboard = () => {
               </div>
 
               {/* Recent Applications */}
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700">
+              <div className="bg-white text-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700">
                 <h3 className="font-semibold mb-4">Recent Applications</h3>
                 <ul className="space-y-3">
                   {recentApplications.map((app) => (
@@ -86,7 +86,7 @@ const Dashboard = () => {
                     >
                       <div>
                         <div className="font-medium">{app.name}</div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm">
                           {app.id} • ${app.amount}
                         </div>
                       </div>
@@ -112,10 +112,10 @@ const Dashboard = () => {
               <h3 className="font-semibold mb-4">All Loans</h3>
 
               {/* TABLE - visible on md+ */}
-              <div className="hidden md:block bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 overflow-x-auto">
+              <div className="hidden md:block text-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 overflow-x-auto">
                 <table className="w-full text-left table-auto">
                   <thead>
-                    <tr className="text-sm text-gray-500 dark:text-gray-400">
+                    <tr className="text-sm ">
                       <th className="py-2">Title</th>
                       <th>Category</th>
                       <th>Interest</th>
