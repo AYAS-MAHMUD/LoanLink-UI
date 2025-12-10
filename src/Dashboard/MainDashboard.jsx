@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FiSun, FiMoon, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../Hook/useRole";
 import Dashboard from "./AdminDashboard/Dashboard";
 
@@ -45,53 +45,53 @@ const MainDashboard = () => {
             <ul className="space-y-2">
               {role === "admin" && (
                 <>
-                <Link to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                <NavLink to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Dashboard
-                  </li></Link>
-                <Link to="/dashboard/manageusers"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                <NavLink to="/dashboard/manageusers"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Manage Users
-                  </li></Link>
-                <Link to="/dashboard/allloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                <NavLink to="/dashboard/allloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     All Loan
-                  </li></Link>
-                <Link to="/dashboard/loanapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                <NavLink to="/dashboard/loanapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Loan Application
-                  </li></Link>
+                  </li></NavLink>
                 </>
               )}
 
               {role === "borrow" && (
                 <>
-                  <Link to="/dashboard/myloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  <NavLink to="/dashboard/myloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     My Loan
-                  </li></Link>
-                  <Link to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     My Profile
-                  </li></Link>
+                  </li></NavLink>
                   
                 </>
               )}
 
               {role === "manager" && (
                 <>
-                  <Link to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  <NavLink to="/dashboard/AMdashboard"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Dashboard
-                  </li></Link>
-                  <Link to="/dashboard/addloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/addloan"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Add Loan
-                  </li></Link>
-                  <Link to="/dashboard/manageloans"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/manageloans"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Manage Loans
-                  </li></Link>
-                  <Link to="/dashboard/pendingapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/pendingapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Pending Application
-                  </li></Link>
-                  <Link to="/dashboard/approvedapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/approvedapplication"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     Approved Application
-                  </li></Link>
-                  <Link to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                  </li></NavLink>
+                  <NavLink to="/dashboard/myprofile"><li className="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                     My Profile
-                  </li></Link>
+                  </li></NavLink>
                 </>
               )}
             </ul>

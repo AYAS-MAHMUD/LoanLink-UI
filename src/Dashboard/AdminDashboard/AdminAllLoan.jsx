@@ -1,27 +1,22 @@
-import React, { use, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
-import { useAxiosSecure } from "../../Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useAxiosSecure } from "../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import { useForm } from "react-hook-form";
 
-const ManageLoans = () => {
-  const { user } = use(AuthContext);
-  const [open, setOpen] = useState(false);
+const AdminAllLoan = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: loanbyManager = [], refetch } = useQuery({
-    queryKey: ["loanbyManager", user?.email],
+  const { register, handleSubmit } = useForm();
+  const { data: allLoan = [], refetch } = useQuery({
+    queryKey: ["allloan"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/allloans/${user?.email}/manageloan`);
+      const res = await axiosSecure.get("/allloans/admin");
       return res.data;
     },
   });
-  // console.log(loanbyManager);
-
-  const { register ,handleSubmit} = useForm();
-  
+  // console.log(allLoan)
   const handleLoanRemove = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -45,48 +40,56 @@ const ManageLoans = () => {
     });
   };
 
-
-  const [id,setId ]=useState()
- 
-  const handleLoanUpdateId=(id)=>{
+  const [id, setId] = useState();
+  const [open, setOpen] = useState(false);
+  const handleLoanUpdateId = (id) => {
     // console.log(id)
-    setId(id)
-    setOpen(true)
-  }
+    setId(id);
+    setOpen(true);
+  };
 
-  const handleLoanUpdate=(data)=>{
-    
-   axiosSecure.patch(`/allloans/${id}`,data)
-    .then(res=>{
-      console.log(res)
-      refetch()
-      alert("Loan update successfully")
-      setOpen(false)
-    })
-  }
+  const handleLoanUpdate = (data) => {
+    axiosSecure.patch(`/allloans/${id}`, data).then((res) => {
+      console.log(res);
+      refetch();
+      alert("Loan update successfully");
+      setOpen(false);
+    });
+  };
 
+  const handleShowOnHome = async (id, currentStatus) => {
+    try {
+      await axiosSecure.patch(`/loans/show-on-home/${id}`, {
+        showOnHome: !currentStatus,
+      });
+
+      refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
       <div>
-        
         <div className="overflow-x-auto">
-          {/* <input type="input" className="border border-amber-200" placeholder="Filter" /> */}
           <table className="table table-zebra">
             {/* head */}
             <thead>
-              <tr className="text-center">
+              <tr>
                 <th>#</th>
                 <th>Image</th>
                 <th>Title</th>
                 <th>Interest</th>
                 <th>Category</th>
+                <th>Created By</th>
+                <th>ShowOnHome</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {loanbyManager.map((i, idx) => (
-                <tr key={i._id} className="text-center">
+              {allLoan.map((i, idx) => (
+                <tr>
                   <th>{idx + 1}</th>
                   <td>
                     <img
@@ -98,6 +101,16 @@ const ManageLoans = () => {
                   <td>{i.title}</td>
                   <td>{i.interest}</td>
                   <td>{i.tag}</td>
+                  <td>{new Date(i.createdAt).toLocaleString()}</td>
+
+                  <td>
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      checked={i.showOnHome}
+                      onChange={() => handleShowOnHome(i._id, i.showOnHome)}
+                    />
+                  </td>
                   <td className="space-x-2">
                     <button
                       onClick={() => handleLoanUpdateId(i._id)}
@@ -140,7 +153,7 @@ const ManageLoans = () => {
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold">Update your Post</h3>
+                  <h3 className="text-lg font-semibold">Update Loan</h3>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
@@ -169,7 +182,6 @@ const ManageLoans = () => {
 
                 <input
                   {...register("max")}
-                  
                   name="max"
                   className="p-3 rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
                   placeholder="Max Loan"
@@ -206,7 +218,6 @@ const ManageLoans = () => {
                     Cancel
                   </button>
                   <button
-
                     type="submit"
                     className="px-5 py-2 rounded-lg bg-emerald-600 text-white"
                   >
@@ -222,4 +233,4 @@ const ManageLoans = () => {
   );
 };
 
-export default ManageLoans;
+export default AdminAllLoan;

@@ -11,7 +11,6 @@ import ErrorPage from "../Pages/ErrorPage";
 import PrivetRoute from "../Provider/PrivetRoute";
 import Dashboard from "../Dashboard/AdminDashboard/Dashboard";
 import ManageUser from "../Dashboard/AdminDashboard/ManageUser";
-import AllLoan from "../Dashboard/AdminDashboard/AllLoan";
 import LoanApplication from "../Dashboard/AdminDashboard/LoanApplication";
 import DetailsCard from "../Components/DetailsCard";
 import Myprofile from "../Dashboard/UserDashboard/Myprofile";
@@ -21,6 +20,7 @@ import AddLoan from "../Dashboard/ManagerDashboard/AddLoan";
 import ManangeLoans from "../Dashboard/ManagerDashboard/ManangeLoans";
 import PendingApplication from "../Dashboard/ManagerDashboard/PendingApplication";
 import ApprovedApplication from "../Dashboard/ManagerDashboard/ApprovedApplication";
+import AdminAllLoan from "../Dashboard/AdminDashboard/AdminAllLoan";
 
 
 export const router = createBrowserRouter([
@@ -76,21 +76,21 @@ export const router = createBrowserRouter([
             },
             {
                 path : 'manageusers',
-                element : <AdminPrivet>
+                element :
                     <ManageUser/>
-                </AdminPrivet>
+                
             },
             {
                 path : 'allloan',
-                element : <AdminPrivet>
-                    <AllLoan/>
-                </AdminPrivet>
+                element : <AdminAllLoan/>
+                    
+                
             },
             {
                 path : 'loanapplication',
-                element : <AdminPrivet>
+                element : 
                     <LoanApplication/>
-                </AdminPrivet>
+               
             },
             {
                 path : 'myprofile',

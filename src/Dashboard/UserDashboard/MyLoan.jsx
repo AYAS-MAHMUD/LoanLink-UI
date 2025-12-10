@@ -15,7 +15,7 @@ const MyLoan = () => {
 
   const [single, setSingle] = useState([]);
 
-  console.log(single);
+  // console.log(single);
   const viewDetails = (id) => {
     setOpen(true);
     console.log(id);
@@ -48,7 +48,8 @@ const MyLoan = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/loanApplication/${id}`);
-        refetch().then((res) => {
+        refetch()
+        .then((res) => {
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
