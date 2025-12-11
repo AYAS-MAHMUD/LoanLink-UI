@@ -60,6 +60,15 @@ const MyLoan = () => {
     });
   };
 
+
+  const handlePayment = async(id)=>{
+    const paymentInfo = {
+      application_id : id
+    }
+    const res = await axiosSecure.post('/create-checkout-session',paymentInfo)
+    console.log(res.data)
+    window.location.assign(res.data.url);
+  }
   return (
     <div className="p-4">
       {/* ✅ Desktop Table */}
@@ -110,7 +119,7 @@ const MyLoan = () => {
                 {/* Actions */}
                 <td className="space-x-2">
                   {i.applicationFeeStatus !== "paid" && (
-                    <button className="btn btn-xs btn-primary">Pay</button>
+                    <button onClick={()=>handlePayment(i._id)} className="btn btn-xs btn-primary">Pay</button>
                   )}
                   <button
                     onClick={() => handlecancelLoan(i._id)}
@@ -173,7 +182,7 @@ const MyLoan = () => {
 
             <div className="flex gap-2 pt-2">
               {i.applicationFeeStatus !== "Paid" && (
-                <button className="btn btn-sm btn-primary flex-1">Pay</button>
+                <button onClick={()=>handlePayment(i._id)} className="btn btn-sm btn-primary flex-1">Pay</button>
               )}
 
               <button

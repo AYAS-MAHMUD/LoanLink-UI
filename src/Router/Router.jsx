@@ -21,6 +21,8 @@ import ManangeLoans from "../Dashboard/ManagerDashboard/ManangeLoans";
 import PendingApplication from "../Dashboard/ManagerDashboard/PendingApplication";
 import ApprovedApplication from "../Dashboard/ManagerDashboard/ApprovedApplication";
 import AdminAllLoan from "../Dashboard/AdminDashboard/AdminAllLoan";
+import PaymentSuccess from "../Payment/PaymentSuccess";
+import PaymentCancel from "../Payment/PaymentCancel";
 
 
 export const router = createBrowserRouter([
@@ -115,6 +117,14 @@ export const router = createBrowserRouter([
             {
                 path : 'approvedapplication',
                 element : <ApprovedApplication/>
+            },
+            {
+                path : 'paymentSuccess',
+                Component : PaymentSuccess
+            },
+            {
+                path : 'paymentCancel',
+                Component : PaymentCancel
             }
         ]
         
