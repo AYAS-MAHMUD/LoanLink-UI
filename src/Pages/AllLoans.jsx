@@ -53,7 +53,7 @@ const [allloan,setAllloan] = useState([])
         <button className="btn" onClick={()=>setCurrentpage((prev)=>Math.max(prev-1,1))}>Prev</button>
         {
           [...Array(totalPage).keys()].map(i=><button onClick={()=>setCurrentpage(i+1)} className={`btn ${currentPage
-            ===i+1 && 'bg-blue-500 text-white'
+            ===i+1 && 'bg-cyan-800 text-white'
           }`}>{i+1}</button>)
         }
         <button className="btn" onClick={()=>setCurrentpage((current)=> Math.min(current+1,totalPage))}>Next</button>
