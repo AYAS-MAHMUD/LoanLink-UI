@@ -1,7 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import { Link } from 'react-router'
 
 export default function Contact() {
   function handleSubmit(e) {
@@ -43,7 +44,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="font-semibold ">Our Location</p>
-                <p className="text-sm text-slate-500">123 Financial District<br/>New York, NY 10005</p>
+                <p className="text-sm text-slate-500">Inani-4750 , Ukhiya<br/>Cox's Bazar</p>
               </div>
             </div>
 
@@ -53,7 +54,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="font-semibold ">Phone Number</p>
-                <p className="text-sm text-slate-500">+1 (555) 123-4567<br/>+1 (555) 987-6543</p>
+                <p className="text-sm text-slate-500">+8801863199573<br/>+8801625286889</p>
               </div>
             </div>
 
@@ -63,7 +64,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="font-semibold ">Email Address</p>
-                <p className="text-sm text-slate-500">support@loanlink.com<br/>info@loanlink.com</p>
+                <p className="text-sm text-slate-500">support@loanlink.com<br/>ayasmahmud48@gmail.com</p>
               </div>
             </div>
 
@@ -81,10 +82,10 @@ export default function Contact() {
           <div className="border-t border-slate-100 mt-8 pt-6">
             <p className="font-semibold  mb-3">Follow Us</p>
             <div className="flex items-center gap-3">
-              <a className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" href="#" aria-label="facebook"><FaFacebookF /></a>
-              <a className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" href="#" aria-label="twitter"><FaTwitter /></a>
-              <a className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" href="#" aria-label="instagram"><FaInstagram /></a>
-              <a className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" href="#" aria-label="linkedin"><FaLinkedinIn /></a>
+              <Link className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" to='https://www.facebook.com/md.ayas.998691' aria-label="facebook"><FaFacebookF /></Link>
+              <Link className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" to='https://github.com/AYAS-MAHMUD' aria-label="twitter"><FaGithub /></Link>
+              <Link className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" to='https://www.instagram.com/the_ayas_mahmud/' aria-label="instagram"><FaInstagram /></Link>
+              <Link className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-600 shadow-sm" to='https://www.linkedin.com/in/mohammad-ayas/' aria-label="linkedin"><FaLinkedinIn /></Link>
             </div>
           </div>
         </motion.div>

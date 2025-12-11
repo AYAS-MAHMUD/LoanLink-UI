@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FiSun, FiMoon, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link, NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet, useNavigate } from "react-router";
 import useRole from "../Hook/useRole";
 import Dashboard from "./AdminDashboard/Dashboard";
 
@@ -11,8 +11,18 @@ import Dashboard from "./AdminDashboard/Dashboard";
 const MainDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false); //aside default vave close takbe
   const { user } = use(AuthContext);
-  const { role } = useRole();
-  // console.log(role);
+  const { role , roleLoading } = useRole();
+ const navigate = useNavigate()
+  useEffect(() => {
+  if (roleLoading) return; 
+
+  if (role === "manager" || role === "admin") {
+    navigate("/dashboard/AMdashboard");
+  } 
+  else if (role === "borrow") {
+    navigate("/dashboard/myloan");
+  }
+}, [role, roleLoading]);
 
   return (
     <div className="min-h-screen">

@@ -76,25 +76,18 @@ export const router = createBrowserRouter([
                 path : 'AMdashboard',
                 element : 
                     <Dashboard></Dashboard>
-                
             },
             {
                 path : 'manageusers',
-                element : <AdminPrivet><ManageUser/></AdminPrivet>
-                    
-                
+                element : <AdminPrivet><ManageUser/></AdminPrivet>  
             },
             {
                 path : 'allloan',
-                element : <AdminPrivet><AdminAllLoan/></AdminPrivet>
-                    
-                
+                element : <AdminPrivet><AdminAllLoan/></AdminPrivet> 
             },
             {
                 path : 'loanapplication',
                 element : <AdminPrivet><LoanApplication/></AdminPrivet>
-                    
-               
             },
             {
                 path : 'myprofile',

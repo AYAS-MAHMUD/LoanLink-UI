@@ -10,29 +10,68 @@ import { useAxiosSecure } from "../Hook/useAxiosSecure";
 
 const AllLoans = () => {
   const axios = useAxiosSecure();
-  const [totalPage,setTotalPage] = useState(0)
-  const [currentPage,setCurrentpage] = useState(1)
-  const limit = 9;
-  console.log(totalPage)
 
-const [allloan,setAllloan] = useState([])
-  useEffect(()=>{
-    axios.get(`/allloans?limit=${limit}&skip=${(currentPage-1)*limit}`)
-    .then(res=>{
-      setAllloan(res.data.result)
-      setTotalPage(Math.ceil(res.data.count/limit))
-    })
-  },[currentPage])
+  const [search,setSearch] = useState("")
+
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentpage] = useState(1);
+  const limit = 9;
+  // console.log(totalPage);
+
+  const [allloan, setAllloan] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/allloans?limit=${limit}&skip=${(currentPage - 1) * limit}&search=${search}`)
+      .then((res) => {
+        setAllloan(res.data.result);
+        setTotalPage(Math.ceil(res.data.count / limit));
+      });
+  }, [currentPage,search]);
+
+
+  
+  console.log(search)
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="my-8 mx-5">
-        <motion.h1 initial={{opacity : 0 ,y : 40}} animate={{opacity : 1, y : 0}} transition={{duration : 1}} className="text-3xl md:text-4xl font-bold  mb-4">
-          Explore Our Loans
-        </motion.h1>
-        <motion.p initial={{opacity : 0 ,y : -40}} animate={{opacity : 1, y : 0}} transition={{duration : 1}} className="text-gray-600 dark:text-gray-400 max-w-2xl">
-          Find the perfect financial solution for your needs. Compare interest
-          rates, terms, and amounts to make an informed decision.
-        </motion.p>
+      <div className="flex flex-col justify-between md:flex-row items-center">
+        <div className="my-8 mx-5">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-3xl md:text-4xl font-bold  mb-4"
+          >
+            Explore Our Loans
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-gray-600 dark:text-gray-400 max-w-2xl"
+          >
+            Find the perfect financial solution for your needs. Compare interest
+            rates, terms, and amounts to make an informed decision.
+          </motion.p>
+        </div>
+        <label className="input">
+          <svg
+            className="h-[1em] opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input onChange={(e)=>setSearch(e.target.value)} type="search" className="grow" placeholder="Search" />
+        </label>
       </div>
       {/* control */}
       <div className="rounded-2xl p-6 shadow-subtle mb-8">
@@ -43,20 +82,37 @@ const [allloan,setAllloan] = useState([])
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {allloan.map((loan) => (
-              <LoanCard loan={loan}/>
+              <LoanCard loan={loan} />
             ))}
           </div>
         </div>
       </div>
-      
+
       <div className="my-10 flex flex-wrap  justify-center gap-3">
-        <button className="btn" onClick={()=>setCurrentpage((prev)=>Math.max(prev-1,1))}>Prev</button>
-        {
-          [...Array(totalPage).keys()].map(i=><button onClick={()=>setCurrentpage(i+1)} className={`btn ${currentPage
-            ===i+1 && 'bg-cyan-800 text-white'
-          }`}>{i+1}</button>)
-        }
-        <button className="btn" onClick={()=>setCurrentpage((current)=> Math.min(current+1,totalPage))}>Next</button>
+        <button
+          className="btn"
+          onClick={() => setCurrentpage((prev) => Math.max(prev - 1, 1))}
+        >
+          Prev
+        </button>
+        {[...Array(totalPage).keys()].map((i) => (
+          <button
+            onClick={() => setCurrentpage(i + 1)}
+            className={`btn ${
+              currentPage === i + 1 && "bg-cyan-800 text-white"
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button
+          className="btn"
+          onClick={() =>
+            setCurrentpage((current) => Math.min(current + 1, totalPage))
+          }
+        >
+          Next
+        </button>
       </div>
     </div>
   );
