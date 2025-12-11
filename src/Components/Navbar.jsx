@@ -186,12 +186,7 @@ export default function Navbar() {
                 >
                   Dashboard
                 </NavLink>
-                <NavLink
-                  to="/dashboard"
-                  className="hover:text-cyan-800 text-md font-semibold "
-                >
-                  Add Loan
-                </NavLink>
+               
                 </>
               )}
               {user ? (

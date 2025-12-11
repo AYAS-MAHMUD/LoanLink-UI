@@ -12,6 +12,9 @@ const LoanCard = ({ loan }) => {
       <motion.div
         key={loan.id}
         whileHover={{ y: -6 }}
+        initial={{opacity :0,y:20,scale :0.9}}
+        whileInView={{opacity : 1,y:0,scale : 1}}
+        transition={{duration : 1}}
         className="bg-white rounded-2xl group shadow-md overflow-hidden border border-slate-100"
       >
         <div className="h-36 bg-gray-50 relative">

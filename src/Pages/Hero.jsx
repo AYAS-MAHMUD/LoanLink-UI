@@ -19,7 +19,7 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-6xl font-extrabold leading-tight ">
+          <motion.h1 initial={{opacity : 0 ,x : -60}} animate={{opacity : 1, x : 0}} transition={{duration : 1}} className="text-6xl font-extrabold leading-tight ">
             Microloans.
             <br /> 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-cyan-800">
@@ -31,13 +31,13 @@ export default function Hero() {
             </span>
             <br />
             Flexible.
-          </h1>
+          </motion.h1>
 
           {/* Description */}
-          <p className="text-gray-600 mt-6 text-lg max-w-md">
+          <motion.p initial={{opacity : 0 ,x : 60}} animate={{opacity : 1, x : 0}} transition={{duration : 1}} className="text-gray-600 mt-6 text-lg max-w-md">
             Get the financial support you need with transparent terms and instant approval.
             No hidden fees, just simple lending.
-          </p>
+          </motion.p>
 
           {/* Buttons */}
           <div className="flex space-x-4 mt-8">
@@ -72,11 +72,12 @@ export default function Hero() {
 
           {/* Main Image Frame */}
           <motion.div
-            initial={{ rotate: -4, opacity: 0 }}
-            animate={{ rotate: -2, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ rotate: -14, opacity: 0 ,x: 20}}
+            animate={{ rotate: -2, opacity: 1 ,x:0}}
+            transition={{ duration: 1.5 }}
             
-            className="w-[420px] h-[420px] bg-gradient-to-b from-gray-200 to-gray-300 rounded-3xl shadow-xl relative overflow-hidden"
+            
+            className="w-[420px] hover:scale-105 transition ease-in-out h-[420px] bg-gradient-to-b from-gray-200 to-gray-300 rounded-3xl shadow-xl relative overflow-hidden"
           >
             {/* Replace with real image */}
             <img
