@@ -23,6 +23,8 @@ import ApprovedApplication from "../Dashboard/ManagerDashboard/ApprovedApplicati
 import AdminAllLoan from "../Dashboard/AdminDashboard/AdminAllLoan";
 import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentCancel from "../Payment/PaymentCancel";
+import ManagerPrivet from "../PrivetDashboard/ManagerPrivet";
+import UserPrivet from "../PrivetDashboard/UserPrivet";
 
 
 export const router = createBrowserRouter([
@@ -78,20 +80,20 @@ export const router = createBrowserRouter([
             },
             {
                 path : 'manageusers',
-                element :
-                    <ManageUser/>
+                element : <AdminPrivet><ManageUser/></AdminPrivet>
+                    
                 
             },
             {
                 path : 'allloan',
-                element : <AdminAllLoan/>
+                element : <AdminPrivet><AdminAllLoan/></AdminPrivet>
                     
                 
             },
             {
                 path : 'loanapplication',
-                element : 
-                    <LoanApplication/>
+                element : <AdminPrivet><LoanApplication/></AdminPrivet>
+                    
                
             },
             {
@@ -100,23 +102,23 @@ export const router = createBrowserRouter([
             },
             {
                 path : 'myloan',
-                element : <MyLoan/>
+                element : <UserPrivet><MyLoan/></UserPrivet>
             },
             {
                 path : 'addloan',
-                element : <AddLoan/>
+                element : <ManagerPrivet><AddLoan/></ManagerPrivet>
             },
             {
                 path : 'manageloans',
-                element : <ManangeLoans/> 
+                element : <ManagerPrivet> <ManangeLoans/> </ManagerPrivet>
             },
             {
                 path : 'pendingapplication',
-                element : <PendingApplication/>
+                element : <ManagerPrivet><PendingApplication/></ManagerPrivet>
             },
             {
                 path : 'approvedapplication',
-                element : <ApprovedApplication/>
+                element : <ManagerPrivet><ApprovedApplication/></ManagerPrivet>
             },
             {
                 path : 'paymentSuccess',

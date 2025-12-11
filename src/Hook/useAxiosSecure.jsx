@@ -8,7 +8,7 @@ const axiosSecure = axios.create({
 
 export const useAxiosSecure = () => {
   const { user } = use(AuthContext);
-//   console.log(user.accessToken);
+console.log(user);
 // console.log(user?.accessToken);
 
   useEffect(() => {

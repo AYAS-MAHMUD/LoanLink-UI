@@ -7,10 +7,13 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useAxiosSecure } from "../Hook/useAxiosSecure";
+import useRole from "../Hook/useRole";
+import toast from "react-hot-toast";
 
 
 const DetailsCard = () => {
   const [open, setOpen] = useState(false);
+  const {role} = useRole()
   const loan = useLoaderData();
   const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure()
@@ -20,7 +23,17 @@ const DetailsCard = () => {
 
   const handleLoanApplicationSubmit = (data) => {
     data.loanId = loan._id;
-    console.log(data);
+    // console.log(data);
+    if (role === 'admin' || role === 'manager') {
+      // you used toast earlier; keeping Swal/Toast optional
+      Swal.fire({
+        icon: 'error',
+        title: 'Not allowed',
+        text: "Admin or Manager can't apply for loan"
+      })
+      return
+    }
+    
     Swal.fire({
       title: `Ready for ${loan.title}`,
       icon: "warning",

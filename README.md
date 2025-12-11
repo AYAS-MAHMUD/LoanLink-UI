@@ -3,6 +3,10 @@
 **Project:** LoanLink — Microloan Request & Approval Tracker System 
 ** purpose:** Through UI / UX user interaction, authentication (Firebase), dashboard, loan listing, loan details, apply form, এবং Stripe redirect handling।  
   
+## How to use this website 
+- (user/borrwer) -> You can register your own gmail or Login with email : 'riaz@gmail.com' pass: riaz1234 
+- Manger -> email : mahmud@gmail.com   pass : mahmud123   (login)
+- Admin -> email : ayas@gmail.com    pass : ayas123    (login)
 
 ---
 

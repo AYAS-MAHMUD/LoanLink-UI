@@ -5,8 +5,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const AddLoan = () => {
-    const axiosSecure = useAxiosSecure();
-    const {user} = use(AuthContext)
+  const axiosSecure = useAxiosSecure();
+  const {user} = use(AuthContext)
   const { register, handleSubmit } = useForm();
   
   const handleAddLoan = (data) => {
@@ -16,7 +16,6 @@ const AddLoan = () => {
     .then(res=>{
         toast.success("Loan Application Post Successfully")
     })
-
   };
   return (
     <div className="">

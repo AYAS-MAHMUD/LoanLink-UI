@@ -41,9 +41,9 @@ export default function Hero() {
 
           {/* Buttons */}
           <div className="flex space-x-4 mt-8">
-            <button className="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-xl shadow-md">
+            <Link to='/allloan' className="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-xl shadow-md">
               Apply for Loan →
-            </button>
+            </Link>
 
             <Link to='/allloan' className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl shadow-md">
               Explore Loans
