@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
                 element : <PrivetRoute>
                     <DetailsCard/>
                 </PrivetRoute>,
-                loader : ({params})=>fetch(`http://localhost:3000/allloans/${params.id}`)
+                loader : ({params})=>fetch(`https://loan-link-server-sooty.vercel.app/allloans/${params.id}`)
             }
         ]
     },

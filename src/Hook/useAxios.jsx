@@ -5,7 +5,7 @@ import {useMemo } from "react";
 export const useAxios = () => {
   const axiosInstance = useMemo(() => {
     return axios.create({
-      baseURL: "http://localhost:3000",
+      baseURL: "https://loan-link-server-sooty.vercel.app",
     });
   }, []);
 

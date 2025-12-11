@@ -8,6 +8,9 @@
 - Manger -> email : mahmud@gmail.com   pass : mahmud123   (login)
 - Admin -> email : ayas@gmail.com    pass : ayas123    (login)
 
+**Live URL:** `https://loanlink01.netlify.app`
+**Server URL:** `https://loan-link-server-sooty.vercel.app`
+
 ---
 
 ## Key Features 
@@ -64,7 +67,6 @@
 ### 5️⃣ Start the development server
 - 4. npm run dev
 
-**Live URL:** ``
 
 
 
