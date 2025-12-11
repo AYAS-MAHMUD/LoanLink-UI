@@ -2,17 +2,19 @@ import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import { useAxiosSecure } from "../../Hook/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const AddLoan = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = use(AuthContext)
   const { register, handleSubmit } = useForm();
+  
   const handleAddLoan = (data) => {
     console.log(data)
     data.email = user?.email
     axiosSecure.post('/allloans',data)
     .then(res=>{
-        alert("Loan Application Post Successfully")
+        toast.success("Loan Application Post Successfully")
     })
 
   };

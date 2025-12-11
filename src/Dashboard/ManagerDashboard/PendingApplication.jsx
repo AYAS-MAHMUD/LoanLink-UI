@@ -6,6 +6,7 @@ import { FaCheck } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const PendingApplication = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,7 @@ const PendingApplication = () => {
     axiosSecure.patch(`/loanApplication/approved/${id}`)
     .then(res=>{
       console.log(res)
-      alert("User application approved successfully")
+      toast.success("User application approved successfully")
       refetch()
     })
   }
@@ -43,7 +44,7 @@ const PendingApplication = () => {
     axiosSecure.patch(`/loanApplication/rejected/${id}`)
     .then(res=>{
       console.log(res)
-      alert("User application rejected successfully")
+      toast.success("User application rejected successfully")
       refetch()
     })
   }

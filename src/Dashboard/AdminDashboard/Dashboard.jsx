@@ -8,12 +8,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-const stats = [
-  { id: 1, title: "Total Loans", value: 124 },
-  { id: 2, title: "Pending Applications", value: 9 },
-  { id: 3, title: "Approved", value: 78 },
-  { id: 4, title: "Payments (USD)", value: "$1,240" },
-];
+import { useQuery } from '@tanstack/react-query';
+import { useAxiosSecure } from '../../Hook/useAxiosSecure';
+
+
+
 
 const chartData = [
   { name: "Jan", loans: 20 },
@@ -22,12 +21,6 @@ const chartData = [
   { name: "Apr", loans: 24 },
   { name: "May", loans: 16 },
   { name: "Jun", loans: 28 },
-];
-
-const recentApplications = [
-  { id: "A-1001", name: "Rahim Khan", amount: 300, status: "Pending" },
-  { id: "A-1002", name: "Sadia Akter", amount: 500, status: "Approved" },
-  { id: "A-1003", name: "Masud Rana", amount: 150, status: "Rejected" },
 ];
 
 // sample loans for table / cards
@@ -39,6 +32,49 @@ const sampleLoans = Array.from({ length: 6 }).map((_, i) => ({
   maxLimit: "$1,000",
 }));
 const Dashboard = () => {
+  const axiosSecure = useAxiosSecure()
+
+  // for total loan
+  const {data : totalloan = []} = useQuery({
+  queryKey : ['totalloan'],
+  queryFn : async ()=>{
+    const res = await axiosSecure.get('/totalloan/admin')
+    return res.data;
+  }
+})
+// console.log(totalloan)
+// for total pending application
+const {data : pending = []} = useQuery({
+  queryKey : ['pending'],
+  queryFn : async ()=>{
+    const res = await axiosSecure.get('/pendingapplication/admin')
+    return res.data
+  }
+})
+// console.log(pending)
+// for total approved application
+const {data : approved = []} = useQuery({
+  queryKey : ['approved'],
+  queryFn : async ()=>{
+    const res = await axiosSecure.get('/approvedapplication/admin')
+    return res.data
+  }
+})
+const stats = [
+  { id: 1, title: "Total Loans", value: totalloan.length },
+  { id: 2, title: "Pending Applications", value: pending.length },
+  { id: 3, title: "Approved", value: approved.length },
+  { id: 4, title: "Payments (USD)", value: "$1,240" },
+];
+
+
+const {data : totalApplication = []} = useQuery({
+  queryKey : ['totalApplication'],
+  queryFn : async ()=>{
+    const res = await axiosSecure.get('/totalApplication/admin')
+    return res.data
+  }
+})
   return (
     <div >
         <main className="p-4 sm:p-6">
@@ -79,15 +115,15 @@ const Dashboard = () => {
               <div className="bg-white text-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700">
                 <h3 className="font-semibold mb-4">Recent Applications</h3>
                 <ul className="space-y-3">
-                  {recentApplications.map((app) => (
+                  {totalApplication.map((app) => (
                     <li
                       key={app.id}
                       className="flex items-center justify-between"
                     >
                       <div>
-                        <div className="font-medium">{app.name}</div>
+                        <div className="font-medium">{app.fullName}</div>
                         <div className="text-sm">
-                          {app.id} • ${app.amount}
+                          {app.id} • ${app.loanAmount}
                         </div>
                       </div>
                       <div
@@ -124,15 +160,15 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y dark:divide-gray-700">
-                    {sampleLoans.map((loan) => (
+                    {totalloan.map((loan) => (
                       <tr
                         key={loan.id}
                         className="hover:bg-gray-50 dark:hover:bg-gray-900"
                       >
                         <td className="py-3">{loan.title}</td>
-                        <td>{loan.category}</td>
+                        <td>{loan.tag}</td>
                         <td>{loan.interest}</td>
-                        <td>{loan.maxLimit}</td>
+                        <td>{loan.max}</td>
                         <td>
                           <div className="flex gap-2">
                             <button className="px-3 py-1 rounded-md border">

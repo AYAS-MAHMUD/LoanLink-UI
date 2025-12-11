@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const ManageLoans = () => {
   const { user } = use(AuthContext);
@@ -60,7 +61,7 @@ const ManageLoans = () => {
     .then(res=>{
       console.log(res)
       refetch()
-      alert("Loan update successfully")
+      toast.success("Loan update successfully")
       setOpen(false)
     })
   }

@@ -8,8 +8,6 @@ export default function Contact() {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
     const payload = Object.fromEntries(data.entries())
-    // console.log('contact payload', payload)
-    alert('Message sent (demo). Check console for payload')
     e.currentTarget.reset()
   }
 

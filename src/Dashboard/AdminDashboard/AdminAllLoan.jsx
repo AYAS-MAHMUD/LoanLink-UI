@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const AdminAllLoan = () => {
   const axiosSecure = useAxiosSecure();
@@ -52,7 +53,7 @@ const AdminAllLoan = () => {
     axiosSecure.patch(`/allloans/${id}`, data).then((res) => {
       console.log(res);
       refetch();
-      alert("Loan update successfully");
+      toast.success("Loan update successfully");
       setOpen(false);
     });
   };

@@ -7,6 +7,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 // import { useAxios } from "../Hook/useAxios";
 import { useAxiosSecure } from "../Hook/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 export default function Register() {
@@ -23,7 +24,7 @@ export default function Register() {
     console.log(data);
     createUser(data.email,data.password)
     .then(() => {
-        alert("Register Successfully")
+        toast.success("Register Successfully")
         navigation("/");
         const userInfo = {
           email : data.email,
@@ -38,14 +39,15 @@ export default function Register() {
         })
       })
       .catch((error) => {
+        toast.error('Register Failed')
         console.log(error);
       });
-    alert("Registered — check console for payload");
+    
   }
   const handleGoogleLogin=()=>{
     signInGoogle()
     .then(res=>{
-        alert("Sign in with google successfully")
+        toast.success("Sign in with google successfully")
         // console.log(res.user)
         navigation('/')
         const userInfo = {
@@ -61,7 +63,8 @@ export default function Register() {
         })
     })
     .catch(error=>{
-      console.log(error)
+      toast.error("Sign in Failed")
+      // console.log(error)
     })
   }
 

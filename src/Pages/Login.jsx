@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 // import { useAxios } from "../Hook/useAxios";
 import { useAxiosSecure } from "../Hook/useAxiosSecure";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const axios = useAxiosSecure()
@@ -29,7 +30,7 @@ export default function Login() {
     console.log("login payload:", data);
     signInUser(data.email,data.password)
     .then(res=>{
-        alert("Login Successfully")
+        toast.success("Login Successfully")
         console.log(res)
         navigation('/')
     })
@@ -41,7 +42,7 @@ export default function Login() {
   const handlegoogleLogin=()=>{
     signInGoogle()
     .then(res=>{
-        alert("Login successfully")
+        toast.success("Login successfully")
         // console.log(res)
         navigation('/')
         const userInfo = {
@@ -64,7 +65,7 @@ export default function Login() {
     console.log('forget')
     passwordReset()
     .then(res=>{
-        alert("Please Cheak your Gmail")
+        toast.success("Please Cheak your Gmail")
         console.log(res)
     })
   }

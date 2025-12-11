@@ -3,6 +3,7 @@ import React, { use } from "react";
 import { motion } from "framer-motion";
 import { FiLogOut, FiMail, FiUser } from "react-icons/fi";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const  Myprofile=()=> {
     const {user, signOutUser} = use(AuthContext)
@@ -10,7 +11,7 @@ const  Myprofile=()=> {
     signOutUser()
     .then(res=>{
       console.log(res)
-      alert("Sign Out Successfully")
+      toast.success("Sign Out Successfully")
     })
     .catch(error=>{
       console.log(error)
